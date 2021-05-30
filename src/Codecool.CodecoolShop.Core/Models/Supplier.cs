@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Codecool.CodecoolShop.Models
+namespace Codecool.CodecoolShop.Core.Models
 {
     public class Supplier : BaseModel
     {

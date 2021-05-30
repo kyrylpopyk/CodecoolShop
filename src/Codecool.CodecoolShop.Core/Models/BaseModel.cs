@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Codecool.CodecoolShop.Models
+namespace Codecool.CodecoolShop.Core.Models
 {
     public abstract class BaseModel
     {

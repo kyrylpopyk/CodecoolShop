@@ -1,29 +1,30 @@
 using System.Collections.Generic;
 using Codecool.CodecoolShop.Daos;
-using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Core.Models;
 
 namespace Codecool.CodecoolShop.Services
 {
     public class ProductService
     {
-        private readonly IProductDao productDao;
-        private readonly IProductCategoryDao productCategoryDao;
+        private readonly IProductDao _productDao;
+        private readonly IProductCategoryDao _productCategoryDao;
 
         public ProductService(IProductDao productDao, IProductCategoryDao productCategoryDao)
         {
-            this.productDao = productDao;
-            this.productCategoryDao = productCategoryDao;
+            _productDao = productDao;
+            _productCategoryDao = productCategoryDao;
         }
 
         public ProductCategory GetProductCategory(int categoryId)
         {
-            return this.productCategoryDao.Get(categoryId);
+            return _productCategoryDao.Get(categoryId);
         }
 
         public IEnumerable<Product> GetProductsForCategory(int categoryId)
         {
-            ProductCategory category = this.productCategoryDao.Get(categoryId);
-            return this.productDao.GetBy(category);
+            // TODO ask about how the categories get Included in Products from here
+            ProductCategory category = _productCategoryDao.Get(categoryId);
+            return _productDao.GetBy(category);
         }
     }
 }

@@ -1,46 +1,37 @@
 using System.Collections.Generic;
-using Codecool.CodecoolShop.Models;
+using System.Linq;
+using Codecool.CodecoolShop.Core.Models;
+using EFCoreInMemory;
 
 namespace Codecool.CodecoolShop.Daos.Implementations
 {
     class ProductCategoryDaoMemory : IProductCategoryDao
     {
-        private List<ProductCategory> data = new List<ProductCategory>();
-        private static ProductCategoryDaoMemory instance = null;
+        private readonly InMemoryDb _db;
 
-        private ProductCategoryDaoMemory()
+        public ProductCategoryDaoMemory(InMemoryDb db)
         {
-        }
-
-        public static ProductCategoryDaoMemory GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ProductCategoryDaoMemory();
-            }
-
-            return instance;
+            _db = db;
         }
 
         public void Add(ProductCategory item)
         {
-            item.Id = data.Count + 1;
-            data.Add(item);
+            _db.ProductCategories.Add(item);
         }
 
         public void Remove(int id)
         {
-            data.Remove(this.Get(id));
+            _db.ProductCategories.Remove(Get(id));
         }
 
         public ProductCategory Get(int id)
         {
-            return data.Find(x => x.Id == id);
+            return _db.ProductCategories.FirstOrDefault(pC => pC.Id == id);
         }
 
         public IEnumerable<ProductCategory> GetAll()
         {
-            return data;
+            return _db.ProductCategories.ToList();
         }
     }
 }

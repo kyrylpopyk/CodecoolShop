@@ -1,4 +1,4 @@
-using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Core.Models;
 
 namespace Codecool.CodecoolShop.Daos
 {
