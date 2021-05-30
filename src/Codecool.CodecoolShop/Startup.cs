@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Daos.Implementations;
-using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Core.Models;
+using EFCoreInMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +29,7 @@ namespace Codecool.CodecoolShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<InMemoryDb>(options => options.UseInMemoryDatabase("CCShopInMemoryDb"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

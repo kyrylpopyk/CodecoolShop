@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Codecool.CodecoolShop.Daos;
-using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Core.Models;
 
 namespace Codecool.CodecoolShop.Services
 {

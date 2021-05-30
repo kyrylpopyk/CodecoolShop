@@ -5,9 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Daos;
 using Codecool.CodecoolShop.Daos.Implementations;
+using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Codecool.CodecoolShop.Models;
+using Codecool.CodecoolShop.Core.Models;
 using Codecool.CodecoolShop.Services;
 
 namespace Codecool.CodecoolShop.Controllers
