@@ -3,42 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Core.Models;
+using EFCoreInMemory;
 
 namespace Codecool.CodecoolShop.Daos.Implementations
 {
-    public class ProductDaoMemory : IProductDao
+    public class ProductDaoMemory : IProductDao //TODO ask if singleton should be used here
     {
-        private List<Product> data = new List<Product>();
-        private static ProductDaoMemory instance = null;
+        private readonly InMemoryDb _db;
 
-        private ProductDaoMemory()
+        public ProductDaoMemory(InMemoryDb db)
         {
-        }
-
-        public static ProductDaoMemory GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new ProductDaoMemory();
-            }
-
-            return instance;
+            _db = db;
         }
 
         public void Add(Product item)
         {
-            item.Id = data.Count + 1;
-            data.Add(item);
+            _db.Add(item);
         }
 
         public void Remove(int id)
         {
-            data.Remove(this.Get(id));
+            _db.Remove(this.Get(id));
         }
 
         public Product Get(int id)
         {
-            return data.Find(x => x.Id == id);
+            return _db.Products.FirstOrDefault(p => p.Id);
         }
 
         public IEnumerable<Product> GetAll()
