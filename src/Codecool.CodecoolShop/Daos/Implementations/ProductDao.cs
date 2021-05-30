@@ -10,16 +10,16 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 {
     public class ProductDao : IProductDao
     {
-        private InMemoryDbContext _db;
+        private CCShopInMemoryDB _db;
 
-        public ProductDao(InMemoryDbContext db) // TODO decouple from DbContext implementation
+        public ProductDao(CCShopInMemoryDB db) // TODO decouple from DbContext implementation
         {
             _db = db;
         }
 
         public void Add(Product item)
         {
-            _db.Products.Add(item);
+            //_db.Products.Add(item);
         }
 
         public void Remove(int id)

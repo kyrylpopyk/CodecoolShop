@@ -29,7 +29,7 @@ namespace Codecool.CodecoolShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<InMemoryDbContext>(options =>
+            services.AddDbContext<CCShopInMemoryDB>(options =>
             {
                 options.UseInMemoryDatabase("InMemoryDB");
             });
