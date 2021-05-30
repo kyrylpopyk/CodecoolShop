@@ -44,7 +44,6 @@ namespace Codecool.CodecoolShop.Daos.Implementations
         public IEnumerable<Product> GetBy(ProductCategory productCategory)
         {
             return _db.Products.Where(p => p.ProductCategory.Id == productCategory.Id);
-            return data.Where(x => x.ProductCategory.Id == productCategory.Id);
         }
     }
 }
