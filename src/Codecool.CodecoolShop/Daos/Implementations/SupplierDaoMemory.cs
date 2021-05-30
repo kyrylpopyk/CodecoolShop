@@ -1,46 +1,39 @@
 using System.Collections.Generic;
+using System.Linq;
 using Codecool.CodecoolShop.Core.Models;
+using EFCoreInMemory;
 
 namespace Codecool.CodecoolShop.Daos.Implementations
 {
     public class SupplierDaoMemory : ISupplierDao
     {
-        private List<Supplier> data = new List<Supplier>();
-        private static SupplierDaoMemory instance = null;
+        private readonly InMemoryDb _db;
 
-        private SupplierDaoMemory()
+        public SupplierDaoMemory(InMemoryDb db)
         {
-        }
-
-        public static SupplierDaoMemory GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new SupplierDaoMemory();
-            }
-
-            return instance;
+            _db = db;
         }
 
         public void Add(Supplier item)
         {
-            item.Id = data.Count + 1;
-            data.Add(item);
+            _db.Add(item);
         }
 
         public void Remove(int id)
         {
-            data.Remove(this.Get(id));
+            //data.Remove(this.Get(id));
+            _db.Suppliers.Remove(Get(id));
         }
 
         public Supplier Get(int id)
         {
-            return data.Find(x => x.Id == id);
+            //return data.Find(x => x.Id == id);
+            return _db.Suppliers.FirstOrDefault(s => s.Id == id); // TODO: is it okay?
         }
 
         public IEnumerable<Supplier> GetAll()
         {
-            return data;
+            return _db.Suppliers;
         }
     }
 }

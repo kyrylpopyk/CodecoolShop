@@ -28,21 +28,22 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public Product Get(int id)
         {
-            return _db.Products.FirstOrDefault(p => p.Id);
+            return _db.Products.FirstOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return data;
+            return _db.Products.ToList();
         }
 
         public IEnumerable<Product> GetBy(Supplier supplier)
         {
-            return data.Where(x => x.Supplier.Id == supplier.Id);
+            return _db.Products.Where(p => p.Supplier.Id == supplier.Id);
         }
 
         public IEnumerable<Product> GetBy(ProductCategory productCategory)
         {
+            return _db.Products.Where(p => p.ProductCategory.Id == productCategory.Id);
             return data.Where(x => x.ProductCategory.Id == productCategory.Id);
         }
     }
