@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Core.Models;
 using EFCoreInMemory;
+using Microsoft.EntityFrameworkCore;
 
 namespace Codecool.CodecoolShop.Daos.Implementations
 {
@@ -43,7 +44,9 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 
         public IEnumerable<Product> GetBy(ProductCategory productCategory)
         {
-            return _db.Products.Where(p => p.ProductCategory.Id == productCategory.Id);
+            return _db.Products
+                .Include(p => p.Supplier)
+                .Where(p => p.ProductCategory.Id == productCategory.Id);
         }
     }
 }
