@@ -10,26 +10,41 @@
 <h5>Shopping Cart</h5>
 
 <div class="container">
-    
-    @foreach (LineItem item in Model.Items)
+    @using (Html.BeginForm("Edit", "Cart", FormMethod.Post))
     {
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="img/@(item.Product.Name).jpg" class="img-fluid rounded mx-auto d-block">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Product.Name</h5>
-                        <p class="card-text">Price: @item.Price.ToString("C2")</p>
-                        <p class="card-text">Quantity: @item.Quantity</p>
-                        <p class="card-text">Subtotal: @((item.Price * item.Quantity).ToString("C2"))</p>
+        @for (var i = 0; i < @Model.Items.Count; i++)
+        {
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-4">
+                        <img src="img/@(Model.Items[i].Product.Name).jpg" class="img-fluid rounded mx-auto d-block" width="65%">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            @Html.HiddenFor(o => Model.Items[i].Id)
+                            <h5 class="card-title">@Model.Items[i].Product.Name</h5>
+                            <p class="card-text">Price: @Model.Items[i].Price.ToString("C2")</p>
+                            <p class="card-text">Quantity: @Html.EditorFor(o => Model.Items[i].Quantity, new { htmlAttributes = new { style = "width:50px" } })</p>
+                            <p class="card-text">Subtotal: @((Model.Items[i].Price * Model.Items[i].Quantity).ToString("C2"))</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+        @if (Model.Items.Any())
+        {
+            <input type="submit" class="btn btn-primary" value="Save changes" />
+        }
+        else
+        {
+            <div class=" card align-items-center border-0">
+                <h5 class="card-title">Your shopping cart is empty!</h5>
+                <button asp-controller="Product" asp-action="Index" class="btn btn-primary">Go back to shopping!</button>
+            </div>
+        }
+
     }
-    
+
     <div class="card mt-5 border-0">
         <h5 class="card-title">Total price: @Model.Items.Sum(i => i.Price * i.Quantity).ToString("C2")</h5>
     </div>
