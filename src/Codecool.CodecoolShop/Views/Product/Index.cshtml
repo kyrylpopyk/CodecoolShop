@@ -2,51 +2,53 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model List<Codecool.CodecoolShop.Core.Models.Product>
+@model List<(List<Product>, List<ProductCategory>, List<Supplier>) >
 
 <div class="container">
     <div class="product-list-parameters-grid">
         <div class="parameters-grid">
             <div class="select-by-type"></div>
             <div class="select-by-type"></div>
-            <div class="select-by-type">
+            <div class="select-by-type" type="suppliers">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown button
+                        Suppliers
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        @foreach (var element in Model[0].Item3)
+                        {
+                            <li><a class="dropdown-item select-type-main" main-type="supplier" id="@element.Id" href="">@element.Name</a></li>
+                        }
                     </ul>
                 </div>
             </div>
-            <div class="select-by-type">
+            <div class="select-by-type" type="Categories">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown button
+                        Categories
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        @foreach (var element in Model[0].Item2)
+                        {
+                            <li><a class="dropdown-item select-type-main" main-type="supplier" id="@element.Id" href="">@element.Name</a></li>
+                        }
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    @foreach (var element in Model)
+    @foreach (var element in Model[0].Item1)
     {
         <div class="col-lg-3 col-lg-3" style="display: inline-block; max-width: 350px; height: 350px">
             <div class="card">
                 <img src="img/@(element.Name).jpg" style="height: 50%; width: 50%; align-self: center; padding-top: 10px">
 
                 <div class="card-body">
-                    <h5 class="card-title text-center">
-                        Product
-                        @{ var num = Model.IndexOf(element) + 1;}
-                        @num
-                    </h5>
+                    @*<h5 class="card-title text-center">
+                            Product
+                            @{ var num = Model[0].Item1.IndexOf(element) + 1;}
+                            @num
+                        </h5>*@
                     <h5 class="card-title">@element.Name</h5>
                     <p class="card-text">@element.Description.</p>
                     <p class="card-text">Category: @element.ProductCategory.Department</p>
@@ -57,4 +59,6 @@
             </div>
         </div>
     }
+    <script src="~/js/Controller.js"></script>
+    <script type="text/javascript">index_start()</script>
 </div>

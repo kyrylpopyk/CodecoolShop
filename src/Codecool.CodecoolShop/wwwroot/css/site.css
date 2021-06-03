@@ -81,7 +81,3 @@ body {
     grid-template-columns: 25% 25% 25% 25%;
     border: 5px solid red;
 }
-
-.select-by-type{
-    justify-self: right;
-}

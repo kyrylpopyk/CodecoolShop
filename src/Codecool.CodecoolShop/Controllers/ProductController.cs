@@ -26,24 +26,27 @@ namespace Codecool.CodecoolShop.Controllers
             _db = db;
             ProductService = new ProductService(
                 new ProductDaoMemory(_db),
-                new ProductCategoryDaoMemory(_db));
+                new ProductCategoryDaoMemory(_db),
+                new SupplierDaoMemory(_db));
         }
 
         public IActionResult Index()
         {
-            var products = ProductService.GetProductsForCategory(1);
-            return View(products.ToList());
+            var products = ProductService.GetAllProducts();
+            var categories = ProductService.GetAllCategories();
+            var suppliers = ProductService.GetAllSupliers();
+
+            var toListProduct = products.ToList();
+
+            return View(new List<(List<Product>, List<ProductCategory>, List<Supplier>)>() 
+            {
+                (products.ToList(), categories.ToList(), suppliers.ToList())
+            });
+        }
+        public IActionResult ChangeTypes()
+        {
+
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
