@@ -5,17 +5,33 @@
     ViewData["Title"] = "Shopping Cart";
 }
 
-SessionId: @Context.Session.Id
+@*Session Id: @Context.Session.Id*@
 
-@foreach (LineItem item in Model.Items)
-{
-    <div class="card-body">
-        @item.Product.Name<br/>
-        @item.Price<br/>
-        @item.Quantity<br/>
+<h5>Shopping Cart</h5>
+
+<div class="container">
+    
+    @foreach (LineItem item in Model.Items)
+    {
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="img/@(item.Product.Name).jpg" class="img-fluid rounded mx-auto d-block">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Product.Name</h5>
+                        <p class="card-text">Price: @item.Price.ToString("C2")</p>
+                        <p class="card-text">Quantity: @item.Quantity</p>
+                        <p class="card-text">Subtotal: @((item.Price * item.Quantity).ToString("C2"))</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div class="card mt-5 border-0">
+        <h5 class="card-title">Total price: @Model.Items.Sum(i => i.Price * i.Quantity).ToString("C2")</h5>
     </div>
-}
 
-
-
-<a class="nav-link text-dark" asp-controller="Product" asp-action="Index"> Back to index</a>
+</div>
