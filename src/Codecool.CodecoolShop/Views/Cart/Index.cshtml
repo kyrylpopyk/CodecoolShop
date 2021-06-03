@@ -1,6 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Http
+@model Order;
 @{
+
     ViewData["Title"] = "Shopping Cart";
 }
 
-La la la @*@HttpContext.Session.GetString(a, b)*@ la la la
+SessionId: @Context.Session.Id
+
+@foreach (LineItem item in Model.Items)
+{
+    <div class="card-body">
+        @item.Product.Name<br/>
+        @item.Price<br/>
+        @item.Quantity<br/>
+    </div>
+}
+
+
+
+<a class="nav-link text-dark" asp-controller="Product" asp-action="Index"> Back to index</a>
