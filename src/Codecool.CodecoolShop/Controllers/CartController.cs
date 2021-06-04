@@ -49,6 +49,25 @@ namespace Codecool.CodecoolShop.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
+        [HttpGet]
+        public IActionResult Checkout()
+        {
+            var order = GetOrderFromSession();
+            var user = order.User ?? new User();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(User user)
+        {
+            var order = GetOrderFromSession();
+            order.User = user;
+            SaveOrderInSession(order);
+
+            return RedirectToAction("Index", "Cart");
+        }
+
 
         private Order GetOrderFromSession()
         {

@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Http
+@model User
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h5>Checkout</h5>
+<div class="container">
+    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(u => u.FirstName)
+            @Html.EditorFor(u => u.FirstName)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.LastName)
+            @Html.EditorFor(u => u.LastName)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.EmailAddress)
+            @Html.EditorFor(u => u.EmailAddress)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.PhoneNumber)
+            @Html.EditorFor(u => u.PhoneNumber)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.BillingAddress.Country) //TODO: make this dropdown
+            @Html.EditorFor(u => u.BillingAddress.Country)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.BillingAddress.City)
+            @Html.EditorFor(u => u.BillingAddress.City)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.BillingAddress.ZipCode)
+            @Html.EditorFor(u => u.BillingAddress.ZipCode)
+        </div>
+        <div>
+            @Html.LabelFor(u => u.BillingAddress.AddressString)
+            @Html.EditorFor(u => u.BillingAddress.AddressString)
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    }
+</div>
