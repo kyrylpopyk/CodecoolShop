@@ -61,11 +61,15 @@ namespace Codecool.CodecoolShop.Controllers
         [HttpPost]
         public IActionResult Checkout(User user)
         {
-            var order = GetOrderFromSession();
-            order.User = user;
-            SaveOrderInSession(order);
+            if (ModelState.IsValid)
+            {
+                var order = GetOrderFromSession();
+                order.User = user;
+                SaveOrderInSession(order);
+                return RedirectToAction("Index", "Cart");
+            }
 
-            return RedirectToAction("Index", "Cart");
+            return View(user);
         }
 
 
