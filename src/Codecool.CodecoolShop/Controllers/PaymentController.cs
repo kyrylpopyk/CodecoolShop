@@ -15,6 +15,7 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Index()
         {
             var user = GetOrderFromSession().User;
+            user ??= new User();
             var validationContext = new ValidationContext(user);
             var validationResults = new List<ValidationResult>();
             bool userDataIsValid = Validator.TryValidateObject(user, validationContext, validationResults, true);
@@ -24,6 +25,7 @@ namespace Codecool.CodecoolShop.Controllers
                 return View();
             }
 
+            TempData["Missing details"] = true;
             return RedirectToAction("Checkout", "Cart"); //TODO add viewbag info about missing data?
         }
 
