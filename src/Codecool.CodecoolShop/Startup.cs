@@ -30,6 +30,11 @@ namespace Codecool.CodecoolShop
         {
             services.AddControllersWithViews();
             services.AddDbContext<InMemoryDb>(options => options.UseInMemoryDatabase("CCShopInMemoryDb"));
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".CodeCoolShop.Session";
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +57,8 @@ namespace Codecool.CodecoolShop
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -59,7 +66,7 @@ namespace Codecool.CodecoolShop
                     pattern: "{controller=Product}/{action=Index}/{id?}");
             });
 
-            // Generate In Memory Data: 
+            // Generate In Memory Data: // TODO: how to refactor this?
 
             //1. Find the service layer within our scope.
             using (var scope = app.ApplicationServices.CreateScope())
