@@ -55,6 +55,8 @@ namespace Codecool.CodecoolShop.Controllers
             var order = GetOrderFromSession();
             var user = order.User ?? new User();
 
+            ViewBag.MissingDetails = TempData["Missing details"] ?? false;
+
             return View(user);
         }
 

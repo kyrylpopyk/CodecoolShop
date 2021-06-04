@@ -5,6 +5,15 @@
 }
 
 <h5>Checkout</h5>
+
+@{
+    if (ViewBag.MissingDetails == true)
+    {
+        <div class="alert-info">You need to enter the required data to proceed!</div>
+    }
+        
+}
+
 <div class="container">
     @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
     {
