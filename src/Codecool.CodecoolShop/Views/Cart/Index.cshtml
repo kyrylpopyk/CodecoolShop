@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.ComponentModel.Design
+@model Order;
+@{
+
+    ViewData["Title"] = "Shopping Cart";
+}
+
+@*Session Id: @Context.Session.Id*@
+
+<h5>Shopping Cart</h5>
+
+<div class="container">
+    
+    @if (Model.Items.Any())
+    {
+        @using (Html.BeginForm("Edit", "Cart", FormMethod.Post))
+        {
+            @for (var i = 0; i < @Model.Items.Count; i++)
+            {
+                <div class="card mb-3" style="max-width: 50%;">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-4">
+                            <img src="img/@(Model.Items[i].Product.Name).jpg" class="img-fluid rounded mx-auto d-block" width="65%">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                @Html.HiddenFor(o => Model.Items[i].Id)
+                                <h5 class="card-title">@Model.Items[i].Product.Name</h5>
+                                <p class="card-text">Price: @Model.Items[i].Price.ToString("C2")</p>
+                                <p class="card-text">Quantity: @Html.EditorFor(o => Model.Items[i].Quantity, new {htmlAttributes = new {style = "width:50px", @class = "bob"}})</p>
+                                <p class="card-text">Subtotal: @((Model.Items[i].Price * Model.Items[i].Quantity).ToString("C2"))</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="card mb-3 border-0" style="max-width: 50%;">
+                <div class="card-body">
+                    <input type="submit" class="btn btn-primary float-end" value="Save changes" />
+                    <h5 class="card-title">Total price: @Model.Items.Sum(i => i.Price * i.Quantity).ToString("C2")</h5>
+                </div>
+            </div>
+
+        }
+
+        <div class="card mb-3 border-0" style="max-width: 50%;">
+            <div class="card-body">
+                <a asp-controller="Cart" asp-action="Checkout" class="btn btn-primary">Checkout</a>
+                <a asp-controller="Payment" asp-action="Index" class="btn btn-primary">Go to payment</a>
+                <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Back to shopping!</a>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        <div class="card align-items-center border-0">
+            <h5 class="card-title">Your shopping cart is empty!</h5>
+            <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Back to shopping!</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Http
+@model User
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h5>Checkout</h5>
+
+@{
+    if (ViewBag.MissingDetails == true)
+    {
+        <div class="alert-info">You need to enter the required data to proceed!</div>
+    }
+        
+}
+
+<div class="container">
+    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+    {
+        <div>
+            @*<label asp-for="FirstName"></label>
+            <input asp-for="FirstName"/>*@
+            @Html.LabelFor(u => u.FirstName)
+            @Html.EditorFor(u => u.FirstName)
+            @*@Html.ValidationMessageFor(u => u.FirstName)*@
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div>
+            @Html.LabelFor(u => u.LastName)
+            @Html.EditorFor(u => u.LastName)
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div>
+            @Html.LabelFor(u => u.EmailAddress)
+            @Html.EditorFor(u => u.EmailAddress)
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
+        <div>
+            @Html.LabelFor(u => u.PhoneNumber)
+            @Html.EditorFor(u => u.PhoneNumber)
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div>
+            @Html.LabelFor(u => u.BillingAddress.Country) @*TODO: make this dropdown*@
+            @Html.EditorFor(u => u.BillingAddress.Country)
+            <span asp-validation-for="BillingAddress.Country" class="text-danger"></span>
+        </div>
+        <div>
+            @Html.LabelFor(u => u.BillingAddress.City)
+            @Html.EditorFor(u => u.BillingAddress.City)
+            <span asp-validation-for="BillingAddress.City" class="text-danger"></span>
+        </div>
+        <div>
+            @Html.LabelFor(u => u.BillingAddress.ZipCode)
+            @Html.EditorFor(u => u.BillingAddress.ZipCode)
+            <span asp-validation-for="BillingAddress.ZipCode" class="text-danger"></span>
+        </div>
+        <div>
+            @Html.LabelFor(u => u.BillingAddress.AddressString)
+            @Html.EditorFor(u => u.BillingAddress.AddressString)
+            <span asp-validation-for="BillingAddress.AddressString" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    }
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
