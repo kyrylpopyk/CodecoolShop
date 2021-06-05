@@ -45,6 +45,7 @@
             <select asp-for="BillingAddress.Country" asp-items="@(new SelectList(ViewBag.Countries))">
                 <option>Select from below</option>
             </select>
+            <span asp-validation-for="BillingAddress.Country" class="text-danger"></span>
         </div>
         <div>
             @Html.LabelFor(u => u.BillingAddress.City)
