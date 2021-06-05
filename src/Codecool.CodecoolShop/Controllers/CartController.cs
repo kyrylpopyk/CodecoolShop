@@ -8,6 +8,7 @@ using Codecool.CodecoolShop.Daos.Implementations;
 using Microsoft.AspNetCore.Http;
 using Codecool.CodecoolShop.Extensions;
 using Codecool.CodecoolShop.Services;
+using CountryData.Standard;
 using EFCoreInMemory;
 
 namespace Codecool.CodecoolShop.Controllers
@@ -15,12 +16,14 @@ namespace Codecool.CodecoolShop.Controllers
     public class CartController : Controller
     {
         public ProductService ProductService { get; }
+        public CountryHelper _countryHelper;
         public CartController(InMemoryDb db)
         {
             ProductService = new ProductService(
                 new ProductDaoMemory(db),
                 new ProductCategoryDaoMemory(db),
                 new SupplierDaoMemory(db));
+            _countryHelper = new CountryHelper();
         }
         public IActionResult Index()
         {
@@ -57,6 +60,7 @@ namespace Codecool.CodecoolShop.Controllers
             var user = order.User ?? new User();
 
             ViewBag.MissingDetails = TempData["Missing details"] ?? false;
+            ViewBag.Countries = _countryHelper.GetCountries();
 
             return View(user);
         }

@@ -7,7 +7,6 @@ namespace Codecool.CodecoolShop.Core.Models
 {
     public class Address
     {
-        [StringLength(80, MinimumLength = 3)]
         [Required]
         public string Country { get; set; }
 
