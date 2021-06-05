@@ -7,5 +7,6 @@ namespace Codecool.CodecoolShop.Daos
     {
         IEnumerable<Product> GetBy(Supplier supplier);
         IEnumerable<Product> GetBy(ProductCategory productCategory);
+        public IEnumerable<Product> GetBySupplierAndCategory(Supplier supplier, ProductCategory category);
     }
 }

@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Codecool.CodecoolShop.Core.Models;
 using Codecool.CodecoolShop.Services;
 using EFCoreInMemory;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Routing;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -32,20 +34,28 @@ namespace Codecool.CodecoolShop.Controllers
 
         public IActionResult Index()
         {
-            var products = ProductService.GetAllProducts();
+            var supplierFilterId = Request.Query["supplierId"].ToString();
+            var categoryFilterId = Request.Query["pCategoryId"].ToString();
+
+            var products = ProductService.GetProductBySeveralTypes(supplierFilterId, categoryFilterId);
             var categories = ProductService.GetAllCategories();
             var suppliers = ProductService.GetAllSupliers();
-
-            var toListProduct = products.ToList();
 
             return View(new List<(List<Product>, List<ProductCategory>, List<Supplier>)>() 
             {
                 (products.ToList(), categories.ToList(), suppliers.ToList())
             });
         }
-        public IActionResult ChangeTypes()
-        {
 
+        [HttpPost]
+        public IActionResult ChangeFilter(string supplierId, string pCategoryId)
+        {
+            var routeValues = new RouteValueDictionary()
+            {
+                { "supplierId", supplierId },
+                { "pCategoryId", pCategoryId}
+            };
+            return RedirectToAction("Index", "Product", routeValues);
         }
 
     }

@@ -19,7 +19,8 @@ namespace Codecool.CodecoolShop.Controllers
         {
             ProductService = new ProductService(
                 new ProductDaoMemory(db),
-                new ProductCategoryDaoMemory(db));
+                new ProductCategoryDaoMemory(db),
+                new SupplierDaoMemory(db));
         }
         public IActionResult Index()
         {

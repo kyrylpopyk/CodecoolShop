@@ -52,19 +52,31 @@ namespace Codecool.CodecoolShop.Services
             return _productDao.GetAll();
         }
 
-        //public IEnumerable<BaseModel> GetAll<T>()
-        //{
-        //    if (typeof(T) == typeof(Supplier))
-        //        return _supplierDao.GetAll();
+        public Product GetProduct(int id)
+        {
+            return _productDao.Get(id);
+        }
 
-        //    else if (typeof(T) == typeof(ProductCategory)) 
-        //        return _productCategoryDao.GetAll();
-
-        //    else if (typeof(T) == typeof(Product))
-        //        return _productDao.GetAll();
-
-        //    else 
-        //        return Enumerable.Empty<BaseModel>();
-        //}
+        public IEnumerable<Product> GetProductBySeveralTypes(string supplierId, string categoryId)
+        {
+            if (supplierId != "" && categoryId != "")
+            {
+                return _productDao.GetBySupplierAndCategory(
+                    _supplierDao.Get(int.Parse(supplierId)), 
+                    _productCategoryDao.Get(int.Parse(categoryId)));
+            }
+            else if ( supplierId != "")
+            {
+                return GetProductsForSuplier(int.Parse(supplierId));
+            }
+            else if ( categoryId != "")
+            {
+                return GetProductsForCategory(int.Parse(categoryId));
+            }
+            else
+            {
+                return GetAllProducts();
+            }
+        }
     }
 }

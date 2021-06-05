@@ -5,38 +5,35 @@
 @model List<(List<Product>, List<ProductCategory>, List<Supplier>) >
 
 <div class="container">
-    <div class="product-list-parameters-grid">
-        <div class="parameters-grid">
-            <div class="select-by-type"></div>
-            <div class="select-by-type"></div>
-            <div class="select-by-type" type="suppliers">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Suppliers
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        @foreach (var element in Model[0].Item3)
+    @using (Html.BeginForm("ChangeFilter", "Product", FormMethod.Post))
+    {
+        <div class="product-list-parameters-grid">
+            <div class="parameters-grid">
+                <div class="select-by-type"><p style="font-weight: bold; font-size: 20px; margin:0px;">Filters</p></div>
+                <div class="select-by-type" type="suppliers">
+                    <select name="supplierId" class="form-select">
+                        <option selected="selected" value="">Category</option>
+                        @foreach (Supplier supplier in Model[0].Item3)
                         {
-                            <li><a class="dropdown-item select-type-main" main-type="supplier" id="@element.Id" href="">@element.Name</a></li>
+                            <option value="@supplier.Id">@supplier.Name</option>
                         }
-                    </ul>
+                    </select>
                 </div>
-            </div>
-            <div class="select-by-type" type="Categories">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        @foreach (var element in Model[0].Item2)
+                <div class="select-by-type" type="categories">
+                    <select name="pCategoryId" class="form-select">
+                        <option selected="selected" value="">Suplier</option>
+                        @foreach (ProductCategory pCategory in Model[0].Item2)
                         {
-                            <li><a class="dropdown-item select-type-main" main-type="supplier" id="@element.Id" href="">@element.Name</a></li>
+                            <option value="@pCategory.Id">@pCategory.Name</option>
                         }
-                    </ul>
+                    </select>
+                </div>
+                <div class="select-by-type">
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
         </div>
-    </div>
+    }
     @foreach (var element in Model[0].Item1)
     {
         <div class="col-lg-3 col-lg-3" style="display: inline-block; max-width: 350px; height: 350px">
@@ -61,4 +58,4 @@
     }
     <script src="~/js/Controller.js"></script>
     <script type="text/javascript">index_start()</script>
-</div>
+    </div>

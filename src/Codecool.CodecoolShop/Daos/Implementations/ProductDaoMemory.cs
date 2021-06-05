@@ -48,5 +48,10 @@ namespace Codecool.CodecoolShop.Daos.Implementations
                 .Include(p => p.Supplier)
                 .Where(p => p.ProductCategory.Id == productCategory.Id);
         }
+
+        public IEnumerable<Product> GetBySupplierAndCategory(Supplier supplier, ProductCategory category)
+        {
+            return _db.Products.Where(p => (p.Supplier.Id == supplier.Id) && (p.ProductCategory.Id == category.Id));
+        }
     }
 }
