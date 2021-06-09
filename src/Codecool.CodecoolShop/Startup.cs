@@ -66,7 +66,7 @@ namespace Codecool.CodecoolShop
                     pattern: "{controller=Product}/{action=Index}/{id?}");
             });
 
-            // Generate In Memory Data: // TODO: how to refactor this?
+            // Generate In Memory Data: // TODO: how to refactor this? => move this to a separate service (call after app is started, not before)
 
             //1. Find the service layer within our scope.
             using (var scope = app.ApplicationServices.CreateScope())
