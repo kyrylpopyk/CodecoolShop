@@ -32,7 +32,6 @@ namespace Codecool.CodecoolShop
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddDbContext<InMemoryDb>(options => options.UseInMemoryDatabase("CCShopInMemoryDb"));
             services.AddDbContext<CCShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
-            //services.AddDbContext<InMemoryDb>(options => options.UseInMemoryDatabase("InMemoryDb"));
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".CodeCoolShop.Session";
@@ -69,7 +68,7 @@ namespace Codecool.CodecoolShop
                     pattern: "{controller=Product}/{action=Index}/{id?}");
             });
 
-            // Generate In Memory Data: // TODO: how to refactor this? => move this to a separate service (call after app is started, not before)
+            // Generate In Memory Data: // TODO: how to refactor this?
 
             //1. Find the service layer within our scope.
             //using (var scope = app.ApplicationServices.CreateScope())
