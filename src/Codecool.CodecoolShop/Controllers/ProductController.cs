@@ -13,23 +13,24 @@ using Codecool.CodecoolShop.Services;
 using EFCoreInMemory;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
+using EFDataAccessLibrary.DataAccess;
 
 namespace Codecool.CodecoolShop.Controllers
 {
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;
-        private readonly InMemoryDb _db;
+        private readonly CCShopContext _db;
         public ProductService ProductService { get; set; }
 
-        public ProductController(ILogger<ProductController> logger, InMemoryDb db)
+        public ProductController(ILogger<ProductController> logger, CCShopContext db)
         {
             _logger = logger;
             _db = db;
             ProductService = new ProductService(
-                new ProductDaoMemory(_db),
-                new ProductCategoryDaoMemory(_db),
-                new SupplierDaoMemory(_db));
+                new ProductDaoEF(_db),
+                new ProductCategoryDaoEF(_db),
+                new SupplierDaoEF(_db));
         }
 
         public IActionResult Index()

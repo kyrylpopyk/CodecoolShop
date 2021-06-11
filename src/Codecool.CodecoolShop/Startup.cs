@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using EFDataAccessLibrary.DataAccess;
 
 namespace Codecool.CodecoolShop
 {
@@ -29,7 +30,9 @@ namespace Codecool.CodecoolShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddDbContext<InMemoryDb>(options => options.UseInMemoryDatabase("CCShopInMemoryDb"));
+            //services.AddDbContext<InMemoryDb>(options => options.UseInMemoryDatabase("CCShopInMemoryDb"));
+            services.AddDbContext<CCShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            //services.AddDbContext<InMemoryDb>(options => options.UseInMemoryDatabase("InMemoryDb"));
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".CodeCoolShop.Session";
@@ -69,15 +72,15 @@ namespace Codecool.CodecoolShop
             // Generate In Memory Data: // TODO: how to refactor this?
 
             //1. Find the service layer within our scope.
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                //2. Get the instance of InMemoryDb in our services layer
-                var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<InMemoryDb>();
+            //using (var scope = app.ApplicationServices.CreateScope())
+            //{
+            //    //2. Get the instance of InMemoryDb in our services layer
+            //    var services = scope.ServiceProvider;
+            //    var context = services.GetRequiredService<InMemoryDb>();
 
-                //3. Call the DataGenerator to create sample data
-                InMemoryDataGenerator.Init(context); // InMemory Data Generation
-            }
+            //    //3. Call the DataGenerator to create sample data
+            //    InMemoryDataGenerator.Init(context); // InMemory Data Generation
+            //}
         }
     }
 }

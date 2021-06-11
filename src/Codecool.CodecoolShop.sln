@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codecool.CodecoolShop", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCoreInMemory", "EFCoreInMemory\EFCoreInMemory.csproj", "{A82B218A-716E-4EC9-8E6A-60394FA2EC0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codecool.CodecoolShop.Core", "Codecool.CodecoolShop.Core\Codecool.CodecoolShop.Core.csproj", "{83ECD6DB-B50F-473E-AD69-DBA4AB7B78BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codecool.CodecoolShop.Core", "Codecool.CodecoolShop.Core\Codecool.CodecoolShop.Core.csproj", "{83ECD6DB-B50F-473E-AD69-DBA4AB7B78BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFDataAccessLibrary", "EFDataAccessLibrary\EFDataAccessLibrary.csproj", "{3387175F-4B23-4814-BBA1-38529D7E346E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{83ECD6DB-B50F-473E-AD69-DBA4AB7B78BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83ECD6DB-B50F-473E-AD69-DBA4AB7B78BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83ECD6DB-B50F-473E-AD69-DBA4AB7B78BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3387175F-4B23-4814-BBA1-38529D7E346E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3387175F-4B23-4814-BBA1-38529D7E346E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3387175F-4B23-4814-BBA1-38529D7E346E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3387175F-4B23-4814-BBA1-38529D7E346E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
