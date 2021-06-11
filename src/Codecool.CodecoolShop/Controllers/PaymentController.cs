@@ -13,8 +13,7 @@ namespace Codecool.CodecoolShop.Controllers
     {
         public IActionResult Index()
         {
-            var user = GetOrderFromSession().User;
-            user ??= new User();
+            var user = GetOrderFromSession().User ?? new User();
             var validationContext = new ValidationContext(user);
             var validationResults = new List<ValidationResult>();
             bool userDataIsValid = Validator.TryValidateObject(user, validationContext, validationResults, true);
