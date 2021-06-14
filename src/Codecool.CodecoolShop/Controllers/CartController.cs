@@ -10,6 +10,7 @@ using Codecool.CodecoolShop.Extensions;
 using Codecool.CodecoolShop.Services;
 using CountryData.Standard;
 using EFCoreInMemory;
+using EFDataAccessLibrary.DataAccess;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -17,12 +18,12 @@ namespace Codecool.CodecoolShop.Controllers
     {
         public ProductService ProductService { get; }
         public CountryHelper _countryHelper;
-        public CartController(InMemoryDb db)
+        public CartController(CCShopContext db)
         {
             ProductService = new ProductService(
-                new ProductDaoMemory(db),
-                new ProductCategoryDaoMemory(db),
-                new SupplierDaoMemory(db));
+                new ProductDaoEF(db),
+                new ProductCategoryDaoEF(db),
+                new SupplierDaoEF(db));
             _countryHelper = new CountryHelper();
         }
         public IActionResult Index()
