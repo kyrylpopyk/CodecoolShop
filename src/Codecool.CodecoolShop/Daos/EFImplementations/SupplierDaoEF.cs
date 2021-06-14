@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Codecool.CodecoolShop.Core.Models;
 using EFCoreInMemory;
 using EFDataAccessLibrary.DataAccess;
+using EFDataAccessLibrary.Models;
 
 namespace Codecool.CodecoolShop.Daos.Implementations
 {

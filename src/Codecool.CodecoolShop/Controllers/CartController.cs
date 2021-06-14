@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Codecool.CodecoolShop.Core.Models;
 using Codecool.CodecoolShop.Daos.Implementations;
 using Microsoft.AspNetCore.Http;
 using Codecool.CodecoolShop.Extensions;
 using Codecool.CodecoolShop.Services;
 using CountryData.Standard;
 using EFCoreInMemory;
+using EFDataAccessLibrary.Models;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -98,7 +98,7 @@ namespace Codecool.CodecoolShop.Controllers
         {
             var lineItem = order.Items.FirstOrDefault(i => i.Product.Id == id); //TODO: Cart: should extract business logic like this to CodeCoolShop.Core?
 
-            if (lineItem.IsNull()) //TODO: Cart: is this extension use reasonable?
+            if (lineItem == null) //TODO: Cart: is this extension use reasonable?
             {
                 order.Items.Add(new LineItem { Product = ProductService.GetProduct(id), Quantity = quantity });
             }

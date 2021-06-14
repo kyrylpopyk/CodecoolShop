@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Codecool.CodecoolShop.Daos;
-using Codecool.CodecoolShop.Core.Models;
 using System.Linq;
+using EFDataAccessLibrary.Models;
 
 namespace Codecool.CodecoolShop.Services
 {

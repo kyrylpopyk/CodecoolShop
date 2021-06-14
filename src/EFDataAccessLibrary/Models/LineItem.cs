@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Codecool.CodecoolShop.Core.Models
+namespace EFDataAccessLibrary.Models
 {
     public class LineItem : BaseModel
     {

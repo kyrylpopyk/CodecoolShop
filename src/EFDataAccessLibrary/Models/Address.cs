@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Codecool.CodecoolShop.Core.Models
+namespace EFDataAccessLibrary.Models
 {
     public class Address
     {

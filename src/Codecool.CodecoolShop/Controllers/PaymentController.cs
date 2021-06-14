@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Codecool.CodecoolShop.Core.Models;
 using Codecool.CodecoolShop.Extensions;
 using Microsoft.AspNetCore.Http;
+using EFDataAccessLibrary.Models;
 
 namespace Codecool.CodecoolShop.Controllers
 {

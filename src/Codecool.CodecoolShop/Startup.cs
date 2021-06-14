@@ -1,19 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Codecool.CodecoolShop.Daos;
-using Codecool.CodecoolShop.Daos.Implementations;
-using Codecool.CodecoolShop.Core.Models;
-using EFCoreInMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EFDataAccessLibrary.DataAccess;
+using EFDataAccessLibrary.Models;
 
 namespace Codecool.CodecoolShop
 {
@@ -29,6 +21,16 @@ namespace Codecool.CodecoolShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            }).AddEntityFrameworkStores<IdentityAppContext>();
+
+            services.AddDbContext<IdentityAppContext>(cfg =>
+            {
+               cfg.UseSqlServer(Configuration.GetConnectionString("Default"));
+            });
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddDbContext<InMemoryDb>(options => options.UseInMemoryDatabase("CCShopInMemoryDb"));
             services.AddDbContext<CCShopContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
@@ -58,6 +60,7 @@ namespace Codecool.CodecoolShop
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseSession();
 

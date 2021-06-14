@@ -1,8 +1,8 @@
-﻿using System;
+﻿using EFDataAccessLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Codecool.CodecoolShop.Core.Models;
 
 namespace Codecool.CodecoolShop.Extensions
 {

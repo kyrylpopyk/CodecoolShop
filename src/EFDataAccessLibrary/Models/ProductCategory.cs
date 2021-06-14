@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Codecool.CodecoolShop.Core.Models
+namespace EFDataAccessLibrary.Models
 {
     public class ProductCategory: BaseModel
     {

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Codecool.CodecoolShop.Core.Models
+namespace EFDataAccessLibrary.Models
 {
     public abstract class BaseModel
     {

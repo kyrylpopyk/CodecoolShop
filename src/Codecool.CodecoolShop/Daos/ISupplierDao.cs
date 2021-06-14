@@ -1,4 +1,5 @@
-using Codecool.CodecoolShop.Core.Models;
+
+using EFDataAccessLibrary.Models;
 
 namespace Codecool.CodecoolShop.Daos
 {

@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Codecool.CodecoolShop.Core\Codecool.CodecoolShop.Core.csproj" />
     <ProjectReference Include="..\EFCoreInMemory\EFCoreInMemory.csproj" />
     <ProjectReference Include="..\EFDataAccessLibrary\EFDataAccessLibrary.csproj" />
   </ItemGroup>
