@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "LoginForm";
+}
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <div class="register-form">
+        <div class="message">
+            <p style="font-weight: bold; font-size: 15px; color: red">@ViewBag.Message</p>
+        </div>
+        <div class="register-user-data">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="loginEmail" style="width: 20%">
+        </div>
+        <div class="register-user-data">
+            <label for="exampleInputEmail1" class="form-label">Password</label>
+            <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" name="loginPassword" style="width: 20%">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+}
+

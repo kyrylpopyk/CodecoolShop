@@ -10,6 +10,7 @@ using Codecool.CodecoolShop.Services;
 using CountryData.Standard;
 using EFCoreInMemory;
 using EFDataAccessLibrary.Models;
+using EFDataAccessLibrary.DataAccess;
 
 namespace Codecool.CodecoolShop.Controllers
 {
@@ -17,12 +18,12 @@ namespace Codecool.CodecoolShop.Controllers
     {
         public ProductService ProductService { get; }
         public CountryHelper _countryHelper;
-        public CartController(InMemoryDb db)
+        public CartController(CCShopContext db)
         {
             ProductService = new ProductService(
-                new ProductDaoMemory(db),
-                new ProductCategoryDaoMemory(db),
-                new SupplierDaoMemory(db));
+                new ProductDaoEF(db),
+                new ProductCategoryDaoEF(db),
+                new SupplierDaoEF(db));
             _countryHelper = new CountryHelper();
         }
         public IActionResult Index()
@@ -98,7 +99,7 @@ namespace Codecool.CodecoolShop.Controllers
         {
             var lineItem = order.Items.FirstOrDefault(i => i.Product.Id == id); //TODO: Cart: should extract business logic like this to CodeCoolShop.Core?
 
-            if (lineItem == null) //TODO: Cart: is this extension use reasonable?
+            if (lineItem.IsNull()) //TODO: Cart: is this extension use reasonable?
             {
                 order.Items.Add(new LineItem { Product = ProductService.GetProduct(id), Quantity = quantity });
             }

@@ -24,6 +24,7 @@ namespace Codecool.CodecoolShop
             services.AddIdentity<AppUser, AppRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
+                options.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<IdentityAppContext>();
 
             services.AddDbContext<IdentityAppContext>(cfg =>

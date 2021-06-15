@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCoreInMemory;
+using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +11,9 @@ namespace Codecool.CodecoolShop.Daos.Implementations
 {
     public class ProductDaoMemory : IProductDao //TODO ask if singleton should be used here
     {
-        private readonly InMemoryDb _db;
+        private readonly CCShopContext _db;
 
-        public ProductDaoMemory(InMemoryDb db)
+        public ProductDaoMemory(CCShopContext db)
         {
             _db = db;
         }

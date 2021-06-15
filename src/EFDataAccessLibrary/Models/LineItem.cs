@@ -8,6 +8,6 @@ namespace EFDataAccessLibrary.Models
     {
         public Product Product { get; set; }
         public int Quantity { get; set; }
-        public decimal Price => Product.DefaultPrice; //TODO: is this gonna work? :D
+        public decimal Price => Product?.DefaultPrice ?? 0; //TODO: is this gonna work? :D
     }
 }
