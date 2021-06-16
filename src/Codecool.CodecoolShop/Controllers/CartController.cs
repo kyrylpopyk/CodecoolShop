@@ -94,6 +94,7 @@ namespace Codecool.CodecoolShop.Controllers
             var productsCount = order.Items.Sum(item => item.Quantity);
 
             HttpContext.Session.SetInt32("CartItemsCount", productsCount);
+            HttpContext.Session.SetString("TotalPrice", order.Items.Sum(i => i.Price * i.Quantity).ToString("C2"));
         }
         private void AddProductToOrder(int id, int quantity, Order order)
         {

@@ -5,12 +5,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Codecool.CodecoolShop.Core.Models;
 using Codecool.CodecoolShop.Extensions;
+using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Http;
 
 namespace Codecool.CodecoolShop.Controllers
 {
     public class PaymentController : Controller
     {
+        private readonly PaymentService _paymentService;
+
+        public PaymentController(PaymentService paymentService)
+        {
+            _paymentService = paymentService;
+        }
         public IActionResult Index()
         {
             var user = GetOrderFromSession().User ?? new User();
@@ -24,6 +31,20 @@ namespace Codecool.CodecoolShop.Controllers
             TempData["Missing details"] = true;
 
             return RedirectToAction("Checkout", "Cart");
+        }
+
+        public IActionResult Pay(PaymentData paymentData)
+        {
+            if (ModelState.IsValid)
+            {
+                var order = GetOrderFromSession();
+                order.PaymentStatus = _paymentService.ProcessPayment(paymentData);
+                SaveOrderInSession(order);
+
+                return RedirectToAction("Index"); // TODO: generate a report
+            }
+
+            return RedirectToAction("Index");
         }
 
         private Order GetOrderFromSession()
