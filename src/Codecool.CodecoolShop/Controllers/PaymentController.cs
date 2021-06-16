@@ -26,14 +26,6 @@ namespace Codecool.CodecoolShop.Controllers
             return RedirectToAction("Checkout", "Cart");
         }
 
-        private static bool ValidateUserData(User user)
-        {
-            var validationContext = new ValidationContext(user);
-            var validationResults = new List<ValidationResult>();
-            bool userDataIsValid = Validator.TryValidateObject(user, validationContext, validationResults, true);
-            return userDataIsValid;
-        }
-
         private Order GetOrderFromSession()
         {
             var order = HttpContext.Session.Get<Order>("ShoppingCart");
@@ -47,6 +39,14 @@ namespace Codecool.CodecoolShop.Controllers
             var productsCount = order.Items.Sum(item => item.Quantity);
 
             HttpContext.Session.SetInt32("CartItemsCount", productsCount);
+        }
+
+        private bool ValidateUserData(User user)
+        {
+            var validationContext = new ValidationContext(user);
+            var validationResults = new List<ValidationResult>();
+            bool userDataIsValid = Validator.TryValidateObject(user, validationContext, validationResults, true);
+            return userDataIsValid;
         }
     }
 }
