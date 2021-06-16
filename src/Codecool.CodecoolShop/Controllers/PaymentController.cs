@@ -14,17 +14,16 @@ namespace Codecool.CodecoolShop.Controllers
         public IActionResult Index()
         {
             var user = GetOrderFromSession().User ?? new User();
-            var validationContext = new ValidationContext(user);
-            var validationResults = new List<ValidationResult>();
-            bool userDataIsValid = Validator.TryValidateObject(user, validationContext, validationResults, true);
+            var userIsValid = ValidateUserData(user);
 
-            if (userDataIsValid)
+            if (userIsValid)
             {
                 return View();
             }
 
             TempData["Missing details"] = true;
-            return RedirectToAction("Checkout", "Cart"); //TODO add viewbag info about missing data?
+
+            return RedirectToAction("Checkout", "Cart");
         }
 
         private Order GetOrderFromSession()
@@ -40,6 +39,14 @@ namespace Codecool.CodecoolShop.Controllers
             var productsCount = order.Items.Sum(item => item.Quantity);
 
             HttpContext.Session.SetInt32("CartItemsCount", productsCount);
+        }
+
+        private static bool ValidateUserData(User user)
+        {
+            var validationContext = new ValidationContext(user);
+            var validationResults = new List<ValidationResult>();
+            bool userDataIsValid = Validator.TryValidateObject(user, validationContext, validationResults, true);
+            return userDataIsValid;
         }
     }
 }
