@@ -33,8 +33,13 @@ namespace Codecool.CodecoolShop.Controllers
                     user.UserName = userName;
 
                     IdentityResult result = await UserManager.CreateAsync(user, userPassword);
-                    ViewBag.Message = "User was created";
-                    return View("LoginForm");
+                    if (result.Succeeded)
+                    {
+                        ViewBag.Message = "User was created";
+                        return View("LoginForm");
+                    }
+                    else
+                        ViewBag.Message = "Your password must contain at least one uppercase, lowercase letter and number digit";
                 }
             }
             catch(Exception exeption)
