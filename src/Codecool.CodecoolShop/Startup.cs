@@ -1,3 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Codecool.CodecoolShop.Daos;
+using Codecool.CodecoolShop.Daos.Implementations;
+using Codecool.CodecoolShop.Core.Models;
+using Codecool.CodecoolShop.Services;
+using EFCoreInMemory;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EFDataAccessLibrary.DataAccess;
 using EFDataAccessLibrary.Models;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Serilog;
 
 namespace Codecool.CodecoolShop
 {
@@ -40,6 +51,8 @@ namespace Codecool.CodecoolShop
                 options.Cookie.Name = ".CodeCoolShop.Session";
                 options.Cookie.IsEssential = true;
             });
+            services.AddTransient<PaymentService>();
+            services.AddScoped<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +71,8 @@ namespace Codecool.CodecoolShop
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSerilogRequestLogging();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -72,7 +87,7 @@ namespace Codecool.CodecoolShop
                     pattern: "{controller=Product}/{action=Index}/{id?}");
             });
 
-            // Generate In Memory Data: // TODO: how to refactor this?
+            // Generate In Memory Data: // TODO: how to refactor this?  => move this to a separate service (call after app is started, not before)
 
             //1. Find the service layer within our scope.
             //using (var scope = app.ApplicationServices.CreateScope())
