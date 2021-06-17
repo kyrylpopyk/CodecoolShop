@@ -73,6 +73,8 @@ namespace Codecool.CodecoolShop.Controllers
             {
                 var order = GetOrderFromSession();
                 order.User = user;
+                user.ShippingAddress = user.BillingAddress;
+                order.ShippingAddress = user.ShippingAddress;
                 SaveOrderInSession(order);
                 return RedirectToAction("Index", "Cart");
             }
@@ -83,18 +85,12 @@ namespace Codecool.CodecoolShop.Controllers
 
         private Order GetOrderFromSession()
         {
-            var order = HttpContext.Session.Get<Order>("ShoppingCart");
-            return order ?? new Order();
+            return HttpContext.Session.GetOrder();
         }
 
         private void SaveOrderInSession(Order order)
         {
-            HttpContext.Session.Set<Order>("ShoppingCart", order);
-
-            var productsCount = order.Items.Sum(item => item.Quantity);
-
-            HttpContext.Session.SetInt32("CartItemsCount", productsCount);
-            HttpContext.Session.SetString("TotalPrice", order.Items.Sum(i => i.Price * i.Quantity).ToString("C2"));
+            HttpContext.Session.SaveOrder(order);
         }
         private void AddProductToOrder(int id, int quantity, Order order)
         {
