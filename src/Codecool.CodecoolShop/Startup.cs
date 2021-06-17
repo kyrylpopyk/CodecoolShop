@@ -14,7 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EFDataAccessLibrary.DataAccess;
-using EFDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Serilog;
 

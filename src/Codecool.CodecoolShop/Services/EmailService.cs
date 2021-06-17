@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Codecool.CodecoolShop.Core.Models;
-using EFDataAccessLibrary.Models;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Configuration;

@@ -9,8 +9,8 @@ using Codecool.CodecoolShop.Extensions;
 using Codecool.CodecoolShop.Services;
 using CountryData.Standard;
 using EFCoreInMemory;
-using EFDataAccessLibrary.Models;
 using EFDataAccessLibrary.DataAccess;
+using Codecool.CodecoolShop.Core.Models;
 
 namespace Codecool.CodecoolShop.Controllers
 {

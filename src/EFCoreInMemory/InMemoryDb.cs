@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EFDataAccessLibrary.Models;
+using Codecool.CodecoolShop.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreInMemory

@@ -1,4 +1,4 @@
-﻿using EFDataAccessLibrary.Models;
+﻿using Codecool.CodecoolShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

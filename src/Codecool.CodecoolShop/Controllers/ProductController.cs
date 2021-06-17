@@ -13,7 +13,7 @@ using EFCoreInMemory;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using EFDataAccessLibrary.DataAccess;
-using EFDataAccessLibrary.Models;
+using Codecool.CodecoolShop.Core.Models;
 
 namespace Codecool.CodecoolShop.Controllers
 {

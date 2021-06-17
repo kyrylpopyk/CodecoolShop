@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Codecool.CodecoolShop.Core.Models;
-using EFDataAccessLibrary.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 

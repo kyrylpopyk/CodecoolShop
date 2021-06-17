@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Codecool.CodecoolShop.Core.Models;
 using EFCoreInMemory;
 using EFDataAccessLibrary.DataAccess;
-using EFDataAccessLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Codecool.CodecoolShop.Daos.Implementations

@@ -1,4 +1,4 @@
-﻿using EFDataAccessLibrary.Models;
+﻿using Codecool.CodecoolShop.Core.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;

@@ -7,7 +7,6 @@ using Codecool.CodecoolShop.Core.Models;
 using Codecool.CodecoolShop.Extensions;
 using Codecool.CodecoolShop.Services;
 using Microsoft.AspNetCore.Http;
-using EFDataAccessLibrary.Models;
 
 namespace Codecool.CodecoolShop.Controllers
 {
