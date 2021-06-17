@@ -11,5 +11,6 @@ namespace Codecool.CodecoolShop.Core.Models
         public User User { get; set; }
         public Address BillingAddress { get; set; }
         public Address ShippingAddress { get; set; }
+        public bool PaymentStatus { get; set; }
     }
 }

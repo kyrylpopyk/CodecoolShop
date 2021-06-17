@@ -1,7 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model PaymentData
+@using Microsoft.AspNetCore.Http
 @{
+    ViewData["Title"] = "Payment";
 }
 
-User valid
+<h5 class="h5">Total price: @Context.Session.GetString("TotalPrice")</h5>
+
+<div>
+    <form asp-action="Pay" asp-controller="Payment" method="post">
+        <div class="mb-3">
+            <label asp-for="CardHolder" class="form-label"></label>
+            <input asp-for="CardHolder" class="form-text"/>
+            <span asp-validation-for="CardHolder" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CardNumber" class="form-label"></label>
+            <input asp-for="CardNumber" class="form-text"/>
+            <span asp-validation-for="CardNumber" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ExpiryDate" class="form-label"></label>
+            <input asp-for="ExpiryDate" class="form-text"/>
+            <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Cvv" class="form-label"></label>
+            <input asp-for="Cvv" class="form-text"/>
+            <span asp-validation-for="Cvv" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Pay</button>
+    </form>
+</div>
