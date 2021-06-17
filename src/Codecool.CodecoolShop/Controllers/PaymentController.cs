@@ -41,7 +41,7 @@ namespace Codecool.CodecoolShop.Controllers
                 order.PaymentStatus = _paymentService.ProcessPayment(paymentData);
                 SaveOrderInSession(order);
 
-                return RedirectToAction("Index"); // TODO: generate a report
+                return RedirectToAction("Index", "OrderConfirmation"); // TODO: generate a report
             }
 
             return RedirectToAction("Index");
@@ -49,17 +49,12 @@ namespace Codecool.CodecoolShop.Controllers
 
         private Order GetOrderFromSession()
         {
-            var order = HttpContext.Session.Get<Order>("ShoppingCart");
-            return order ?? new Order();
+            return HttpContext.Session.GetOrder();
         }
 
         private void SaveOrderInSession(Order order)
         {
-            HttpContext.Session.Set<Order>("ShoppingCart", order);
-
-            var productsCount = order.Items.Sum(item => item.Quantity);
-
-            HttpContext.Session.SetInt32("CartItemsCount", productsCount);
+            HttpContext.Session.SaveOrder(order);
         }
 
         private bool ValidateUserData(User user)

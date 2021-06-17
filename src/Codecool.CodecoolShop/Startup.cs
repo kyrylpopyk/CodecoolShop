@@ -40,6 +40,7 @@ namespace Codecool.CodecoolShop
                 options.Cookie.IsEssential = true;
             });
             services.AddTransient<PaymentService>();
+            services.AddScoped<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

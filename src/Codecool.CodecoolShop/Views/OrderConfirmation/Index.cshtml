@@ -1,0 +1,63 @@
+﻿@model Order
+@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div>
+    <div class="container">
+        <div class="row">
+            <h2 class="h2">Order Status</h2>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p>Name: </p>
+            </div>
+            <div class="col">
+                <p>@Model.User?.FirstName @Model.User?.LastName </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p>Shipping Address: </p>
+            </div>
+            <div class="col">
+                <p>@Model.ShippingAddress?.AddressString @Model.ShippingAddress?.City @Model.ShippingAddress?.ZipCode @Model.ShippingAddress?.Country </p>
+            </div>
+        </div>
+
+        @foreach (var item in Model.Items)
+        {
+            <div class="row">
+                <div class="col">
+                    <p>Item: </p>
+                </div>
+                <div class="col">
+                    <p>@item?.Product.Name, quantity: @item?.Quantity, item price: @item?.Price, subtotal: @(item?.Price * item?.Quantity) </p>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col">
+                <p>Payment status: </p>
+            </div>
+            <div class="col">
+                @{
+                   if (Model.PaymentStatus)
+                   {
+                       <p> Complete </p>
+                   }
+                   else if (Model.User != null)
+                   {
+                       <p> Pending </p>
+                   }
+                }
+            </div>
+        </div>
+
+
+    </div>
+</div>
