@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using EFDataAccessLibrary.DataAccess;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Serilog;
 
 namespace Codecool.CodecoolShop
 {
@@ -58,6 +59,8 @@ namespace Codecool.CodecoolShop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
