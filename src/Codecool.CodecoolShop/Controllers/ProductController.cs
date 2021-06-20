@@ -8,12 +8,12 @@ using Codecool.CodecoolShop.Daos.Implementations;
 using Codecool.CodecoolShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Codecool.CodecoolShop.Core.Models;
 using Codecool.CodecoolShop.Services;
 using EFCoreInMemory;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Routing;
 using EFDataAccessLibrary.DataAccess;
+using Codecool.CodecoolShop.Core.Models;
 
 namespace Codecool.CodecoolShop.Controllers
 {

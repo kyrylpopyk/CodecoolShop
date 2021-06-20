@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Codecool.CodecoolShop.Core.Models
 {
-    public class User
+    public class User 
     {
         [Display(Name = "First Name")]
         [StringLength(60, MinimumLength = 3)]

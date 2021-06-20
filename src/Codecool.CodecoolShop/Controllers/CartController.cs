@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Codecool.CodecoolShop.Core.Models;
 using Codecool.CodecoolShop.Daos.Implementations;
 using Microsoft.AspNetCore.Http;
 using Codecool.CodecoolShop.Extensions;
@@ -11,6 +10,7 @@ using Codecool.CodecoolShop.Services;
 using CountryData.Standard;
 using EFCoreInMemory;
 using EFDataAccessLibrary.DataAccess;
+using Codecool.CodecoolShop.Core.Models;
 
 namespace Codecool.CodecoolShop.Controllers
 {
